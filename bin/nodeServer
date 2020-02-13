@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+
+import app from "../app.js";
+import http from "http";
+import chalk from "chalk";
+
+//supmtaserver:server
+//import debug from "debug";
+//debug("booting %o", "supmtaserver:server");
+
+const port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
+
+const server = http.createServer(app); //creates http server
+
+//Listen on provided port, on all network interfaces.
+server.listen(port, () => {
+  console.log(
+    chalk.green(
+      `\nNode server's Status -> Succesfully Running an HTTP connection on PORT :${port}\n`
+    )
+  );
+});
+server.on("error", onError);
+
+//Normalize a port into a number, string, or false.
+function normalizePort(val) {
+  const port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    return val; // named pipe
+  }
+  if (port >= 0) {
+    return port; // port number
+  }
+  return false;
+}
+
+//Event listener for HTTP server "error" event.
+function onError(error) {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+  var bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}

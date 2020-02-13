@@ -1,0 +1,19 @@
+{
+  "name": "supmtaserver",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "clear && node ./bin/nodeServer"
+  },
+  "type": "module",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "gtfs-realtime-bindings": "0.0.5",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.2",
+    "request": "^2.88.2"
+  }
+}
